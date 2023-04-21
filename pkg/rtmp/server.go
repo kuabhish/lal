@@ -96,7 +96,7 @@ func (server *Server) handleTcpConnect(conn net.Conn) {
 	session := NewServerSession(server, conn)
 	err = session.RunLoop()
 	Log.Infof("eror from a rtmp connection. remoteAddr=%s", conn.RemoteAddr().String())
-	Log.Errorf(err)
+	Log.Infof(err)
 
 	if session.DisposeByObserverFlag {
 		return
