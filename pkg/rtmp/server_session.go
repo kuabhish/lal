@@ -11,6 +11,7 @@ package rtmp
 import (
 	"fmt"
 	"net"
+	"runtime"
 	"strings"
 	"sync"
 
@@ -532,6 +533,10 @@ func (s *ServerSession) modConnProps() {
 }
 
 func (s *ServerSession) dispose(err error) error {
+	_, file, no, ok := runtime.Caller(1)
+	if ok {
+		fmt.Printf("called from %s#%d\n", file, no)
+	}
 	var retErr error
 	s.disposeOnce.Do(func() {
 		Log.Infof("[%s] lifecycle dispose rtmp ServerSession. err=%+v", s.UniqueKey(), err)
