@@ -10,6 +10,7 @@ package rtmp
 
 import (
 	"crypto/tls"
+	"fmt"
 	"net"
 
 	"github.com/q191201771/lal/pkg/base"
@@ -95,8 +96,8 @@ func (server *Server) handleTcpConnect(conn net.Conn) {
 	Log.Infof("accept a rtmp connection. remoteAddr=%s", conn.RemoteAddr().String())
 	session := NewServerSession(server, conn)
 	err := session.RunLoop()
-	Log.Infof("eror from a rtmp connection. remoteAddr=%s", conn.RemoteAddr().String())
-	Log.Infof(err)
+	// Log.Infof("eror from a rtmp connection. remoteAddr=%s", conn.RemoteAddr().String())
+	fmt.Println("error ", err)
 
 	if session.DisposeByObserverFlag {
 		return
