@@ -94,7 +94,9 @@ func (server *Server) Dispose() {
 func (server *Server) handleTcpConnect(conn net.Conn) {
 	Log.Infof("accept a rtmp connection. remoteAddr=%s", conn.RemoteAddr().String())
 	session := NewServerSession(server, conn)
-	_ = session.RunLoop()
+	err = session.RunLoop()
+	Log.Infof("eror from a rtmp connection. remoteAddr=%s", conn.RemoteAddr().String())
+	Log.Errorf(err)
 
 	if session.DisposeByObserverFlag {
 		return
